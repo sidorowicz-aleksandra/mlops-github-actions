@@ -1,12 +1,14 @@
 name: Trigger tests on pull request
 
 on:
-    [pull_request]:
+  pull_request:
+    branches:
+      - main
     
 jobs:
-    code-test:
-        runs-on: ubuntu-latest
-        steps:
-        - name: Placeholder
-          run: |
-            echo "Will add code checks here in next challenge"
+  code-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Placeholder
+      run: |
+        echo "Will add code checks here in next challenge"
