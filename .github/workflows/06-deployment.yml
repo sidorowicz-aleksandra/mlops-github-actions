@@ -5,18 +5,19 @@ on:
 
 jobs:
   deploy:
-  name: endpoint-deployment
-  runs-on: ubuntu-latest
-  steps:
-    - name: Check out repo
-      uses: actions/checkout@main
- - name: Install az ml extension
-      run: az extension add -n ml -y
-    - name: Azure login
-      uses: azure/login@v1
-      with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: Trigger Azure Machine Learning job
-      run: |
-        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --stream
+    name: endpoint-deployment
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@main
+      - name: Install az ml extension
+        run: az extension add -n ml -y
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Deploy model to an endpoint
+        run: |
+          az ml online-deployment create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/job.yml 
   
