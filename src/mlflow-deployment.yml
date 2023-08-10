@@ -4,7 +4,7 @@ endpoint_name: mlflow-endpoint-asidorowicz-mlops-challenge
 model:
   name: diabetes-prod
   version: 1
-  local_path: model
+  local_path: diabetes-prod/model
   model_format: mlflow
-instance_type: Standard_F2s_v2
+instance_type: Standard_DS11_v2
 instance_count: 1
