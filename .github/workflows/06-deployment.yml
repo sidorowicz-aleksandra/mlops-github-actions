@@ -20,5 +20,5 @@ jobs:
       - name: Deploy model to an endpoint
         run: |
           az ml online-endpoint create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/create-endpoint.yml 
-          az ml online-deployment create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/deploy-endpoint.yml 
+          az ml online-deployment create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/mlflow-deployment.yml 
   
