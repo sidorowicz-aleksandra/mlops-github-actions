@@ -21,7 +21,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Trigger Azure Machine Learning job
       run: |
-        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --stream true
+        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --stream
   job2:
     needs: job1 
     name: production
