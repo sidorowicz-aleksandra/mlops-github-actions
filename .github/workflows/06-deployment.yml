@@ -3,25 +3,8 @@ name: Deploy the model to an endpoint
 on:
   workflow_dispatch
 
-jobs:
-  create:
-    name: endpoint-create
-    environment: dev
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repo
-        uses: actions/checkout@main
-      - name: Install az ml extension
-        run: az extension add -n ml -y
-      - name: Azure login
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
-      - name: Create model endpoint
-        run: |
-          az ml online-endpoint create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/create-endpoint.yml          
+jobs:        
   deploy:
-    needs: create
     name: endpoint-deployment
     environment: dev
     runs-on: ubuntu-latest
