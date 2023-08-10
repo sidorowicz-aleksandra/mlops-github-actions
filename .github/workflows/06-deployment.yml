@@ -1,0 +1,24 @@
+name: Deploy the model to an endpoint
+
+on:
+  workflow_dispatch
+
+jobs:
+  deploy:
+    name: endpoint-deployment
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@main
+      - name: Install az ml extension
+        run: az extension add -n ml -y
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Deploy model to an endpoint
+        run: |
+          az ml online-endpoint create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/create-endpoint.yml 
+          az ml online-deployment create --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --file src/mlflow-deployment.yml 
+  
