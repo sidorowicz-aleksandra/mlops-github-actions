@@ -11,6 +11,6 @@ inputs:
     mode: ro_mount
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:asidorowicz1
+compute: azureml:asidorowicz-compute-cluster
 experiment_name: diabetes-job
 description: Testing job execution functionalities
