@@ -8,6 +8,7 @@ on:
 jobs:
   job1:
     name: experiment
+    environment: dev
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
@@ -20,9 +21,11 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Trigger Azure Machine Learning job
       run: |
-        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm
+        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm --stream True
   job2:
+    needs: job1 
     name: production
+    environment: prod
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
@@ -35,4 +38,4 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Trigger Azure Machine Learning job
       run: |
-        az ml job create --file src/job.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm
+        az ml job create --file src/job_prod.yml --resource-group rg-mlstream-llm --workspace-name aml-mlstream-llm
